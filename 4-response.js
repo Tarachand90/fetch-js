@@ -1,6 +1,7 @@
 import { renderData } from "./renderData.js";
 
 const urlStr = "https://jsonplaceholder.typicode.com/users";
+const imageUrl = "https://picsum.photos/id/237/200/300";
 
 export const getData = async () => {
   const url = new URL(urlStr);
@@ -51,3 +52,27 @@ async function getDataAsync(request) {
     console.warn(err.message);
   }
 }
+
+export const fetchImage = async () => {
+  try {
+    const response = await fetch(imageUrl);
+
+    if (!response.ok) {
+      throw new Error(`Image request failed with status ${response.status}`);
+    }
+
+    // Convert response to blob
+    const blob = await response.blob();
+
+    // Create a Blob URL
+    const imageBlobUrl = URL.createObjectURL(blob);
+
+    // Find the image element and set its source to the Blob URL
+    const imageElement = document.getElementById("pic");
+    imageElement.src = imageBlobUrl;
+
+    console.log("Image fetched and rendered from Blob");
+  } catch (error) {
+    console.error("Error fetching the image:", error.message);
+  }
+};
