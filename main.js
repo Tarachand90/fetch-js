@@ -55,7 +55,8 @@ Bonus: Measuring Download progress
 //import { getData } from "./2-try-async.js";
 // import { getData } from "./3-url-request.js";
 //import { getData, fetchImage } from "./4-response.js";
-import { getData } from "./5-auth-queryString.js";
+// import { getData } from "./5-auth-queryString.js";
+import { getData } from "./5-auth-queryString-fileupload.js";
 // import { getData } from "./6-auth.js";
 // import { setData } from './7-upload.js';
 // import { getData } from './8-cors.js';
