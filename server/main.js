@@ -38,6 +38,11 @@ app.post("/", (req, res) => {
     age: age,
   };
 
+  // Add response headers
+  res.setHeader("Content-Type", "application/json");
+  res.setHeader("X-Custom-Header", "This is a custom header");
+  res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
+
   // Respond with the transformed data
   res.status(201).json(responseData);
 });
