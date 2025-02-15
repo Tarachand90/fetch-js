@@ -2,6 +2,8 @@ import { renderData } from "./renderData.js";
 
 const urlStr = "https://jsonplaceholder.typicode.com/users";
 const imageUrl = "https://picsum.photos/id/237/200/300";
+const fontStr =
+  "https://fonts.gstatic.com/s/montserrat/v25/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCs16Hw5aXp-p7K4KLg.woff2";
 
 export const getData = async () => {
   const url = new URL(urlStr);
@@ -63,7 +65,7 @@ export const fetchImage = async () => {
 
     // Convert response to blob
     const blob = await response.blob();
-
+    console.log("Image Blob Object: ", blob);
     // Create a Blob URL
     const imageBlobUrl = URL.createObjectURL(blob);
 
