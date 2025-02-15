@@ -3,12 +3,15 @@ import cors from "cors";
 
 const app = express();
 const port = 8787; /// http://127.0.0.1:8787/ksldjflkjsd
+const expectedApiKey = "ksldjflkjsd"; // Expected API key
 
 // make sure you have nodeJS installed from https://nodejs.org/
 //cd server
 //npm install
 //node main.js
 
+// Middleware to parse JSON request bodies
+app.use(express.json());
 app.use(cors());
 
 app.get("/", (req, res) => {
@@ -16,7 +19,27 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-  res.status(201).send("thanks for adding something");
+  // Extract the API key from the query string
+  const apiKey = req.query["x-api-key"];
+
+  // Validate the API key
+  if (apiKey !== expectedApiKey) {
+    return res.status(403).json({ error: "Invalid API key" });
+  }
+  // Extract user data from the request body
+  const { firstName, lastName, age } = req.body;
+  if (!firstName || !lastName || !age) {
+    return res.status(400).json({ error: "Invalid data" });
+  }
+
+  // Create a combined response
+  const responseData = {
+    name: `${firstName} ${lastName}`,
+    age: age,
+  };
+
+  // Respond with the transformed data
+  res.status(201).json(responseData);
 });
 
 app.put("/:id", (req, res) => {
